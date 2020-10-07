@@ -1,13 +1,9 @@
 const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
-const myPeer = new Peer(undefined, {
-  //key: "peerjs",
-  //secure: true,
-  host: "https://face-conference-peerjs-server.herokuapp.com/",
-  port: 9000,
-  //port: 443,
-  // host: "/",
-  // port: "3002",
+const myPeer = new Peer({
+  //host: "/",
+  //port: "3002",
+  //debug: "3",
 });
 const myVideo = document.createElement("video");
 myVideo.muted = true;
