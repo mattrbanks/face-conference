@@ -3,7 +3,13 @@ const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer({
   //host: "/",
   //port: "3002",
-  //debug: "3",
+  debug: "3",
+  //key: "peerjs",
+  //host: "face-conference-peerjs-server2.herokuapp.com/",
+  //port: 9000,
+  secure: true,
+  port: 443,
+  //path: "face-conference-peerjs-server2.herokuapp.com/",
 });
 const myVideo = document.createElement("video");
 myVideo.muted = true;
