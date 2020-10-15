@@ -8,6 +8,14 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
+  res.render("login");
+});
+
+app.get("/dashboard", (req, res) => {
+  res.render("home");
+});
+
+app.get("/new-room", (req, res) => {
   res.redirect(`/${uuidV4()}`);
 });
 
