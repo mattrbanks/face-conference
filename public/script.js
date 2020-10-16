@@ -67,3 +67,17 @@ function addVideoStream(video, stream) {
   });
   videoGrid.append(video);
 }
+
+function submitHandler() {
+  console.log("submitHandler worked");
+  let x = document.forms["nameForm"]["name"].value;
+  console.log("Name: " + x);
+  window.location.href = "/dashboard";
+}
+
+function roomSubmitHandler() {
+  console.log("roomSubmitHandler worked");
+  let x = document.forms["roomNameForm"]["roomName"].value;
+  console.log("Name: " + x);
+  window.location.href = "/new-room";
+}

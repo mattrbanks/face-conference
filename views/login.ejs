@@ -11,27 +11,41 @@
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="script.js" defer></script>
     <title>Document</title>
+    <style>
+      #login-name {
+        display: flex;
+        justify-content: center;
+        margin: 30rem 0 0 0;
+      }
+    </style>
   </head>
   <body>
-    <h1>Face Conference Login</h1>
-    <form>
+    <div style="text-align: center">
+      <h1>Welcome To Face Conference</h1>
+    </div>
+    <div id="login-name">
       <div>
-        <label for="name">Name</label>
+        <h2>Please submit your name to login</h2>
+        <form
+          name="nameForm"
+          onsubmit="event.preventDefault(); submitHandler();"
+        >
+          <div>
+            <label for="name">Name</label>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              required
+            />
+            <button type="submit" value="Submit" class="btn-primary">
+              sign in
+            </button>
+          </div>
+        </form>
       </div>
-      <div>
-        <input
-          type="text"
-          name="name"
-          placeholder="Enter your name"
-          required
-          value=""
-        />
-      </div>
-    </form>
-    <a style="color: white; text-decoration: none" href="/dashboard"
-      ><button type="submit" value="Submit" class="btn-primary">
-        sign in
-      </button></a
-    >
+    </div>
   </body>
 </html>

@@ -23,6 +23,10 @@ app.get("/:room", (req, res) => {
   res.render("room", { roomId: req.params.room });
 });
 
+// app.post("/new-name-login") {
+//   console.log("got it!")
+// }
+
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
