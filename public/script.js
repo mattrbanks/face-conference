@@ -1,4 +1,5 @@
 const socket = io("/");
+//const { v4: uuidV4 } = require("uuid");
 const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer({
   //host: "/",
@@ -15,6 +16,11 @@ const myVideo = document.createElement("video");
 myVideo.muted = true;
 const peers = {};
 console.log(peers);
+let roomIdTempHolder = [];
+console.log(roomIdTempHolder);
+let newRoom = window.location.href;
+console.log(newRoom);
+console.log(window.location.href);
 navigator.mediaDevices
   .getUserMedia({
     video: true,
@@ -76,6 +82,10 @@ function submitHandler() {
   console.log("Name: " + x);
   window.location.href = "/dashboard";
   document.getElementById("nameFormId").reset();
+  socket.emit("generate-id", () => {
+    //THIS NEEDS TO TRIGGER THE SERVER TO GENERATE A UUID AND SEND IT BACK HERE FOR USE
+    console.log("call server for uuid");
+  });
 }
 
 function roomSubmitHandler() {
@@ -91,10 +101,26 @@ function roomSubmitHandler() {
     .getElementById("room-list")
     .appendChild(li)
     .addEventListener("click", function () {
-      window.location.href = "/new-room";
+      // let newRoom = true;
+      // console.log(newRoom);
+      // if (newRoom === true) {
+      window.location.href = "/new-room"; //this needs to be a generated uuid url - so "/uuid"
+      roomIdTempHolder.push(newRoom);
+      //console.log(roomIdTempHolder);
+      // newRoom = false;
+      //console.log(newRoom);
+      //console.log("we create a new room");
+      //console.log(window.location.href);
+      window.location.href = roomIdTempHolder[0];
+      roomIdTempHolder = [];
+      // } else if (newRoom === false) {
+      //console.log("we now go to window.location.href");
+      // }
     });
   document.getElementById("roomNameFormId").reset();
 }
+
+//function
 
 // document
 //   .getElementById("new-room-btn")

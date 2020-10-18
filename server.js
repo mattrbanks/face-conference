@@ -37,6 +37,11 @@ io.on("connection", (socket) => {
       socket.to(roomId).broadcast.emit("user-disconnected", userId);
     });
   });
+
+  socket.on("generate-id", (uuidV4) => {
+    // I need to somehow generate a uuid here and send it back to script.js 
+    // client side for use int he event listener for the generated list item
+  });
 });
 
 server.listen(process.env.PORT || 3001);
