@@ -1,5 +1,4 @@
 const socket = io("/");
-//const { v4: uuidV4 } = require("uuid");
 const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer({
   //host: "/",
@@ -82,17 +81,21 @@ function submitHandler() {
   console.log("Name: " + x);
   window.location.href = "/dashboard";
   document.getElementById("nameFormId").reset();
+}
+
+function roomSubmitHandler() {
+  let generatedId = "";
   socket.emit("generate-id", () => {
     //THIS NEEDS TO TRIGGER THE SERVER TO GENERATE A UUID AND SEND IT BACK HERE FOR USE
     console.log("call server for uuid");
   });
-}
-
-function roomSubmitHandler() {
-  console.log("roomSubmitHandler worked");
+  socket.on("new-id-generated", (newId) => {
+    console.log(newId);
+    generatedId = newId;
+    console.log(generatedId);
+  });
   let x = document.forms["roomNameForm"]["roomName"].value;
   console.log("Room Name: " + x);
-  //window.location.href = "/new-room";
   let text = x;
   let li = document.createElement("li");
   let node = document.createTextNode(text);
@@ -101,22 +104,22 @@ function roomSubmitHandler() {
     .getElementById("room-list")
     .appendChild(li)
     .addEventListener("click", function () {
-      // let newRoom = true;
-      // console.log(newRoom);
-      // if (newRoom === true) {
-      window.location.href = "/new-room"; //this needs to be a generated uuid url - so "/uuid"
+      window.location.href = generatedId; //this needs to be a generated uuid url - so "/uuid"
       roomIdTempHolder.push(newRoom);
-      //console.log(roomIdTempHolder);
-      // newRoom = false;
-      //console.log(newRoom);
-      //console.log("we create a new room");
-      //console.log(window.location.href);
       window.location.href = roomIdTempHolder[0];
       roomIdTempHolder = [];
-      // } else if (newRoom === false) {
-      //console.log("we now go to window.location.href");
-      // }
     });
+  console.log(x);
+  fetch("http://localhost:3001/dashboard", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      room: x,
+    }),
+  })
+    .then((response) => response.text())
+    .then((text) => console.log(text))
+    .catch((err) => console.log(err));
   document.getElementById("roomNameFormId").reset();
 }
 
