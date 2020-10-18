@@ -33,6 +33,7 @@ navigator.mediaDevices
 
     socket.on("user-connected", (userId) => {
       connectToNewUser(userId, stream);
+      peers[userId].name = "matt";
     });
   });
 
@@ -71,13 +72,30 @@ function addVideoStream(video, stream) {
 function submitHandler() {
   console.log("submitHandler worked");
   let x = document.forms["nameForm"]["name"].value;
+
   console.log("Name: " + x);
   window.location.href = "/dashboard";
+  document.getElementById("nameFormId").reset();
 }
 
 function roomSubmitHandler() {
   console.log("roomSubmitHandler worked");
   let x = document.forms["roomNameForm"]["roomName"].value;
-  console.log("Name: " + x);
-  window.location.href = "/new-room";
+  console.log("Room Name: " + x);
+  //window.location.href = "/new-room";
+  let text = x;
+  let li = document.createElement("li");
+  let node = document.createTextNode(text);
+  li.appendChild(node);
+  document
+    .getElementById("room-list")
+    .appendChild(li)
+    .addEventListener("click", function () {
+      window.location.href = "/new-room";
+    });
+  document.getElementById("roomNameFormId").reset();
 }
+
+// document
+//   .getElementById("new-room-btn")
+//   .addEventListener("click", function () {});

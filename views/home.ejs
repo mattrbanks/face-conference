@@ -8,26 +8,10 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" type="text/css" href="/css/views.css" />
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="script.js" defer></script>
     <title>Document</title>
-    <style>
-      #room-name {
-        /* display: flex;
-        justify-content: center; */
-        margin: 20rem 10rem 0 0;
-        border-right: 0.0625rem solid grey;
-      }
-      #dash-choices {
-        display: flex;
-        justify-content: center;
-      }
-      #ex-room-name {
-        /* display: flex;
-        justify-content: center; */
-        margin: 20rem 0 0 0;
-      }
-    </style>
   </head>
   <body>
     <div style="text-align: center">
@@ -38,20 +22,27 @@
         <div style="margin-right: 10rem">
           <h2>Create a new room</h2>
           <form
+            id="roomNameFormId"
             name="roomNameForm"
             onsubmit="event.preventDefault(); roomSubmitHandler();"
           >
             <div>
               <label for="roomName">Room Name</label>
             </div>
-            <div>
+            <div id="inputRoom" class="form-group">
               <input
                 type="text"
                 name="roomName"
                 placeholder="Name your room"
                 required
+                class="form-control"
               />
-              <button type="submit" value="Submit" class="btn-primary">
+              <button
+                id="new-room-btn"
+                type="submit"
+                value="Submit"
+                class="btn btn-primary"
+              >
                 Create New Room
               </button>
             </div>
@@ -60,6 +51,7 @@
       </div>
       <div id="ex-room-name">
         <h2>Join an existing room</h2>
+        <ul id="room-list"></ul>
       </div>
     </div>
     <!-- <a style="color: white; text-decoration: none" href="/new-room"

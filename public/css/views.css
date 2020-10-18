@@ -1,0 +1,68 @@
+h1 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+ul li {
+  /* color: blue; */
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  border: 0.5px solid #000;
+  border-radius: 25px;
+  font-size: 18px;
+  transition: 0.2s;
+  margin-bottom: 0.5rem;
+
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+ul li:hover {
+  background: #ddd;
+}
+
+#room-name {
+  /* display: flex;
+        justify-content: center; */
+  margin: 20rem 10rem 0 0;
+  border-right: 0.0625rem solid grey;
+}
+#dash-choices {
+  display: flex;
+  justify-content: center;
+}
+#ex-room-name {
+  /* display: flex;
+        justify-content: center; */
+  margin: 20rem 0 0 0;
+}
+
+#input-room {
+  display: flex !important;
+}
+
+#new-room-btn {
+  margin-top: 1rem;
+}
+
+#signInBtn {
+  margin-top: 1rem;
+}
+
+#login-name {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 0 0;
+}
+
+#loginImg {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0 0;
+}

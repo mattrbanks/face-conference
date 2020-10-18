@@ -6,6 +6,7 @@ const { v4: uuidV4 } = require("uuid");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+// app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
   res.render("login");

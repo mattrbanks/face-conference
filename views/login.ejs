@@ -8,25 +8,33 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" type="text/css" href="/css/views.css" />
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="script.js" defer></script>
     <title>Document</title>
-    <style>
+    <!-- <style>
       #login-name {
         display: flex;
         justify-content: center;
         margin: 30rem 0 0 0;
       }
-    </style>
+    </style> -->
   </head>
   <body>
-    <div style="text-align: center">
-      <h1>Welcome To Face Conference</h1>
+    <div id="loginImg">
+      <img
+        src="https://cdn.pixabay.com/photo/2020/05/13/13/32/video-conference-5167472_960_720.jpg"
+        alt="a video conference"
+      />
+      <div style="position: absolute">
+        <h1>Welcome To Face Conference</h1>
+      </div>
     </div>
     <div id="login-name">
       <div>
         <h2>Please submit your name to login</h2>
         <form
+          id="nameFormId"
           name="nameForm"
           onsubmit="event.preventDefault(); submitHandler();"
         >
@@ -39,8 +47,14 @@
               name="name"
               placeholder="Enter your name"
               required
+              class="form-control"
             />
-            <button type="submit" value="Submit" class="btn-primary">
+            <button
+              id="signInBtn"
+              type="submit"
+              value="Submit"
+              class="btn btn-primary"
+            >
               sign in
             </button>
           </div>
