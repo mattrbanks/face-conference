@@ -6,8 +6,9 @@ ul li {
   /* color: blue; */
   cursor: pointer;
   position: relative;
-  padding: 12px 8px 12px 40px;
+  padding: 12px 8px 12px 12px;
   list-style-type: none;
+  text-align: center;
   background: #eee;
   border: 0.5px solid #000;
   border-radius: 25px;

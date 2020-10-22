@@ -3,6 +3,23 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const { v4: uuidV4 } = require("uuid");
+require("dotenv").config();
+const mongoose = require("mongoose");
+
+mongoose.set("useFindAndModify", false);
+mongoose.connect(
+  process.env.DB_CONNECT,
+  { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+  () => {
+    console.log("Connected to db!");
+    server.listen(process.env.PORT || 3001, () =>
+      console.log("server is up and running")
+    );
+    //app.listen(3000, () => console.log("Server Up and running"));
+  }
+);
+
+const Room = require("./models/rooms.model"); //should rooms be lowercase?
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -15,21 +32,36 @@ app.get("/", (req, res) => {
   res.render("login");
 });
 
-app.get("/dashboard", (req, res) => {
-  res.render("home");
+let userNameTemp = [];
+app.get("/:dashboard", (req, res) => {
+  console.log("user name received: " + userNameTemp[0]);
+  let userNameDash = userNameTemp[0].slice(0);
+  res.render("home", { data: { userName: userNameDash } });
+  //userNameTemp = [];
 });
 
 app.get("/new-room", (req, res) => {
   res.redirect(`/${uuidV4()}`);
 });
 
+//passing data from server to ejs file
 app.get("/:room", (req, res) => {
+  console.log(req.params);
   res.render("room", { roomId: req.params.room });
 });
 
 app.post("/dashboard", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
+  console.log(req.body.room);
+  const newRoom = new Room({
+    room: req.body.room,
+  });
+
+  newRoom
+    .save()
+    .then(() => res.json("Room added! " + req.body.room))
+    .catch((err) => res.status(400).json("Error: " + err));
+  // console.log(req.body);
+  // res.send(req.body);
 });
 
 app.post("/", (req, res) => {
@@ -39,17 +71,18 @@ app.post("/", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
-    socket.join(roomId);
+    socket.join(roomId); // roomId is a url route so you join it by going to the url roomId
     socket.to(roomId).broadcast.emit("user-connected", userId);
 
     socket.on("disconnect", () => {
       socket.to(roomId).broadcast.emit("user-disconnected", userId);
     });
   });
-  // let newGenId = "";
-  // function generateId(v4) {
-  //   let newId = `/${uuidV4()}`;
-  // }
+
+  socket.on("user-name", (userName) => {
+    userNameTemp.push(userName);
+    console.log(userNameTemp);
+  });
 
   socket.on("generate-id", (v4) => {
     // I need to somehow generate a uuid here and send it back to script.js
@@ -59,6 +92,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT || 3001, () =>
-  console.log("server is up and running")
-);
+// server.listen(process.env.PORT || 3001, () =>
+//   console.log("server is up and running")
+// );

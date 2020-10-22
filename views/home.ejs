@@ -15,7 +15,7 @@
   </head>
   <body>
     <div style="text-align: center">
-      <h1>Face Conference Dashboard</h1>
+      <h1><%= data.userName %></h1>
     </div>
     <div id="dash-choices">
       <div id="room-name">
@@ -51,11 +51,14 @@
       </div>
       <div id="ex-room-name">
         <h2>Join an existing room</h2>
-        <ul id="room-list"></ul>
+        <ul id="room-list">
+          <a style="text-decoration: none" href="/lobby"
+            ><li style="text-decoration: none; color: #000; text-align: center">
+              Lobby (For Everyone)
+            </li></a
+          >
+        </ul>
       </div>
     </div>
-    <!-- <a style="color: white; text-decoration: none" href="/new-room"
-      ><button class="btn-primary">create new room</button></a
-    > -->
   </body>
 </html>

@@ -38,7 +38,7 @@ navigator.mediaDevices
 
     socket.on("user-connected", (userId) => {
       connectToNewUser(userId, stream);
-      peers[userId].name = "matt";
+      peers[userId].name = "matt"; //needs to be dynamic
     });
   });
 
@@ -49,7 +49,7 @@ socket.on("user-disconnected", (userId) => {
 });
 
 myPeer.on("open", (id) => {
-  socket.emit("join-room", ROOM_ID, id);
+  socket.emit("join-room", ROOM_ID, id); //room id and user id sent to server
   console.log(ROOM_ID, id);
 });
 
@@ -77,22 +77,38 @@ function addVideoStream(video, stream) {
 function submitHandler() {
   console.log("submitHandler worked");
   let x = document.forms["nameForm"]["name"].value;
-
+  socket.emit("user-name", x);
   console.log("Name: " + x);
   window.location.href = "/dashboard";
   document.getElementById("nameFormId").reset();
+  loadNameDash();
 }
 
 function roomSubmitHandler() {
   let generatedId = "";
+  let theNewId = "";
   socket.emit("generate-id", () => {
     //THIS NEEDS TO TRIGGER THE SERVER TO GENERATE A UUID AND SEND IT BACK HERE FOR USE
     console.log("call server for uuid");
   });
   socket.on("new-id-generated", (newId) => {
     console.log(newId);
-    generatedId = newId;
     console.log(generatedId);
+    generatedId = newId.slice(0);
+    theNewId = newId.slice(0);
+    console.log(generatedId);
+    console.log(theNewId);
+
+    fetch("http://localhost:3001/dashboard", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        room: theNewId,
+      }),
+    })
+      .then((response) => response.text())
+      .then((text) => console.log(text))
+      .catch((err) => console.log(err));
   });
   let x = document.forms["roomNameForm"]["roomName"].value;
   console.log("Room Name: " + x);
@@ -109,22 +125,7 @@ function roomSubmitHandler() {
       window.location.href = roomIdTempHolder[0];
       roomIdTempHolder = [];
     });
-  console.log(x);
-  fetch("http://localhost:3001/dashboard", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      room: x,
-    }),
-  })
-    .then((response) => response.text())
-    .then((text) => console.log(text))
-    .catch((err) => console.log(err));
   document.getElementById("roomNameFormId").reset();
 }
 
-//function
-
-// document
-//   .getElementById("new-room-btn")
-//   .addEventListener("click", function () {});
+document.getElementById("url").innerText = `${window.location.href}`;
