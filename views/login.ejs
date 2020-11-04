@@ -13,7 +13,7 @@
     <script src="script.js" defer></script>
     <title>Document</title>
   </head>
-  <body>
+  <div id="login">
     <div id="loginImg">
       <img
         src="https://github.com/mattrbanks/face-conference/blob/master/images/video-conference.jpg?raw=true"
@@ -52,7 +52,57 @@
             </button>
           </div>
         </form>
+        <h2 id="user-name-test" style="text-align: center"></h2>
       </div>
     </div>
-  </body>
+  </div>
+  <div id="dashboard" class="invisible">
+    <h2 id="user-name" style="text-align: center"></h2>
+    <div style="text-align: center">
+      <h1>Welcome to your dashboard</h1>
+    </div>
+    <div id="dash-choices">
+      <div id="room-name">
+        <div style="margin-right: 10rem">
+          <h2>Create a new room</h2>
+          <form
+            id="roomNameFormId"
+            name="roomNameForm"
+            onsubmit="event.preventDefault(); roomSubmitHandler();"
+          >
+            <!-- <div>
+              <label for="roomName">Room Name</label>
+            </div> -->
+            <div id="inputRoom" class="form-group">
+              <!-- <input
+                type="text"
+                name="roomName"
+                placeholder="Name your room"
+                required
+                class="form-control"
+              /> -->
+              <button
+                id="new-room-btn"
+                type="submit"
+                value="Submit"
+                class="btn btn-primary"
+              >
+                Generate Room
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="ex-room-name">
+        <h2>Join an existing room</h2>
+        <ul id="room-list">
+          <a style="text-decoration: none" href="/lobby">
+            <li style="text-decoration: none; color: #000; text-align: center">
+              Lobby (For Everyone)
+            </li>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </div>
 </html>

@@ -13,9 +13,10 @@
     <script src="script.js" defer></script>
     <title>Document</title>
   </head>
-  <body>
+  <body id="dashboard" onload="dashName()">
+    <h2 id="user-name" style="text-align: center"></h2>
     <div style="text-align: center">
-      <h1><%= data.userName %></h1>
+      <h1>Welcome to your dashboard</h1>
     </div>
     <div id="dash-choices">
       <div id="room-name">
@@ -26,24 +27,24 @@
             name="roomNameForm"
             onsubmit="event.preventDefault(); roomSubmitHandler();"
           >
-            <div>
+            <!-- <div>
               <label for="roomName">Room Name</label>
-            </div>
+            </div> -->
             <div id="inputRoom" class="form-group">
-              <input
+              <!-- <input
                 type="text"
                 name="roomName"
                 placeholder="Name your room"
                 required
                 class="form-control"
-              />
+              /> -->
               <button
                 id="new-room-btn"
                 type="submit"
                 value="Submit"
                 class="btn btn-primary"
               >
-                Create New Room
+                Generate Room
               </button>
             </div>
           </form>

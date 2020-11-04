@@ -1,11 +1,11 @@
 const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer({
-  //host: "/",
-  //port: "3002",
+  // host: "/",
+  // port: "3002",
   debug: "3",
   //key: "peerjs",
-  //host: "face-conference-peerjs-server2.herokuapp.com/",
+  //host: "https://face-conference-peerjs-server2.herokuapp.com/",
   //port: 9000,
   secure: true,
   port: 443,
@@ -74,14 +74,71 @@ function addVideoStream(video, stream) {
   videoGrid.append(video);
 }
 
+function dashName() {
+  socket.emit("send-back-name", { name: "" });
+  socket.on("send-back-name", (userName) => {
+    console.log(socket.id);
+    console.log(userName);
+  });
+  //document.getElementById("user-name").innerText = `${"name"}`;
+  if (typeof Storage !== "undefined") {
+    // Store
+    //sessionStorage.setItem("name", x);
+    // Retrieve
+    document.getElementById("user-name").innerHTML =
+      "Hello " + sessionStorage.getItem("name") + ",";
+  } else {
+    document.getElementById("user-name").innerHTML =
+      "Sorry, your browser does not support Web Storage...";
+  }
+  // if (tempName.length > 0) {
+  //   let name = tempName[0];
+  //   document.getElementById("user-name").innerText = `${name}`;
+  //   //tempName = [];
+  // } else {
+  //   document.getElementById("user-name").innerText = `${"...loading"}`;
+  // }
+}
+
 function submitHandler() {
   console.log("submitHandler worked");
   let x = document.forms["nameForm"]["name"].value;
   socket.emit("user-name", x);
   console.log("Name: " + x);
-  window.location.href = "/dashboard";
+  //let name = [];
+
+  // socket.on("send-back-name", (userName) => {
+  //   //let name = userName;
+  //   //name.push(userName);
+  //   //return name;
+  //   // tempName.push(userName);
+  //   // console.log(tempName);
+  //   //window.setTimeout(console.log(userName), 5000);
+  //   //document.getElementById("welcome-msg").addEventListener("load", myFunction);
+  //   //document.getElementById("user-name").innerText = `${window.location.href}`;
+  //   //document.getElementById("user-name").innerHTML = "userName";
+  //   //socket.emit("send-back-name", userName);
+  //   // userNameTemp.push(userName);
+  //   // console.log(userNameTemp);
+  // });
+  //myFunction(name);
+  //window.location.href = "/dashboard";
   document.getElementById("nameFormId").reset();
-  loadNameDash();
+  document.getElementById("login").style.display = "none";
+  document.getElementById("dashboard").className = "visible";
+  // Check browser support
+  if (typeof Storage !== "undefined") {
+    // Store
+    sessionStorage.setItem("name", x);
+    // Retrieve
+    document.getElementById("user-name").innerHTML =
+      "Hello " + sessionStorage.getItem("name") + ",";
+  } else {
+    document.getElementById("user-name").innerHTML =
+      "Sorry, your browser does not support Web Storage...";
+  }
+  //dashName();
+  //loadNameDash();
 }
 
 function roomSubmitHandler() {
@@ -110,9 +167,9 @@ function roomSubmitHandler() {
       .then((text) => console.log(text))
       .catch((err) => console.log(err));
   });
-  let x = document.forms["roomNameForm"]["roomName"].value;
-  console.log("Room Name: " + x);
-  let text = x;
+  //let x = document.forms["roomNameForm"]["roomName"].value;
+  //console.log("Room Name: " + x);
+  let text = "Room " + Math.random();
   let li = document.createElement("li");
   let node = document.createTextNode(text);
   li.appendChild(node);

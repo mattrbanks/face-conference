@@ -67,3 +67,11 @@ ul li:hover {
   justify-content: center;
   margin: 0 0 0 0;
 }
+
+.invisible {
+  display: none;
+}
+
+.visible {
+  display: block;
+}

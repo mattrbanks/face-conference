@@ -6,6 +6,9 @@ const { v4: uuidV4 } = require("uuid");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
+//const users = { someid: "some name" };
+const users = {};
+
 mongoose.set("useFindAndModify", false);
 mongoose.connect(
   process.env.DB_CONNECT,
@@ -32,13 +35,20 @@ app.get("/", (req, res) => {
   res.render("login");
 });
 
-let userNameTemp = [];
-app.get("/:dashboard", (req, res) => {
-  console.log("user name received: " + userNameTemp[0]);
-  let userNameDash = userNameTemp[0].slice(0);
-  res.render("home", { data: { userName: userNameDash } });
-  //userNameTemp = [];
+app.get("/dashboard", (req, res) => {
+  res.render("home");
 });
+
+// let userNameTemp = [];
+// app.get("/:dashboard", (req, res) => {
+//   console.log("user name received: " + userNameTemp[0]);
+//   if (userNameTemp.length !== 0) {
+//     let userNameDash = userNameTemp[0].slice(0);
+//     res.render("home", { data: { userName: userNameDash } });
+//   }
+
+//   //userNameTemp = [];
+// });
 
 app.get("/new-room", (req, res) => {
   res.redirect(`/${uuidV4()}`);
@@ -46,12 +56,12 @@ app.get("/new-room", (req, res) => {
 
 //passing data from server to ejs file
 app.get("/:room", (req, res) => {
-  console.log(req.params);
+  //console.log(req.params);
   res.render("room", { roomId: req.params.room });
 });
 
 app.post("/dashboard", (req, res) => {
-  console.log(req.body.room);
+  //console.log(req.body.room);
   const newRoom = new Room({
     room: req.body.room,
   });
@@ -65,7 +75,7 @@ app.post("/dashboard", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   res.send("got it");
 });
 
@@ -80,8 +90,29 @@ io.on("connection", (socket) => {
   });
 
   socket.on("user-name", (userName) => {
-    userNameTemp.push(userName);
-    console.log(userNameTemp);
+    // console.log("Got the user name: " + userName);
+    // console.log(socket.id);
+    users[socket.id] = userName;
+    console.log(users);
+    console.log(users[socket.id]);
+    //socket.emit("send-back-name", userName);
+    // userNameTemp.push(userName);
+    // console.log(userNameTemp);
+  });
+
+  socket.on("send-back-name", (obj) => {
+    console.log(users);
+    console.log(obj);
+    let socketId = socket.id;
+    obj.name = users[socketId];
+    console.log(obj);
+    console.log(users);
+    console.log(socket.id);
+    console.log(socket.id in users);
+    socket.emit("send-back-name", Object.entries(users));
+    // if (socket.id in users) {
+    //   console.log("id is here");
+    // }
   });
 
   socket.on("generate-id", (v4) => {
