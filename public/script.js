@@ -1,15 +1,20 @@
 const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer({
+  //local server
   // host: "/",
   // port: "3002",
-  debug: "3",
-  //key: "peerjs",
-  //host: "https://face-conference-peerjs-server2.herokuapp.com/",
-  //port: 9000,
+
+  //hosted server
+  key: "peerjs",
+  host: "face-conference-peerjs-server2.herokuapp.com",
   secure: true,
   port: 443,
-  //path: "face-conference-peerjs-server2.herokuapp.com/",
+
+  //cloud server config
+  // debug: "3",
+  // secure: true,
+  // port: 443,
 });
 const myVideo = document.createElement("video");
 myVideo.muted = true;
@@ -100,6 +105,10 @@ function dashName() {
   // }
 }
 
+function rename() {
+  document.getElementById("login-name").style.display = "flex";
+}
+
 function submitHandler() {
   console.log("submitHandler worked");
   let x = document.forms["nameForm"]["name"].value;
@@ -124,6 +133,7 @@ function submitHandler() {
   //myFunction(name);
   //window.location.href = "/dashboard";
   document.getElementById("nameFormId").reset();
+  document.getElementById("login-name").style.display = "none";
   document.getElementById("login").style.display = "none";
   document.getElementById("dashboard").className = "visible";
   // Check browser support
@@ -186,3 +196,7 @@ function roomSubmitHandler() {
 }
 
 document.getElementById("url").innerText = `${window.location.href}`;
+
+function scrollToBottom() {
+  document.getElementById("login-name").scrollIntoView(false); // scroll to bottom of element
+}

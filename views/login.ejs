@@ -13,96 +13,184 @@
     <script src="script.js" defer></script>
     <title>Document</title>
   </head>
-  <div id="login">
-    <div id="loginImg">
-      <img
-        src="https://github.com/mattrbanks/face-conference/blob/master/images/video-conference.jpg?raw=true"
-        alt="a video conference"
-      />
-      <div style="position: absolute">
-        <h1>Welcome To Face Conference</h1>
-      </div>
-    </div>
-    <div id="login-name">
-      <div>
-        <h2>Please submit your name to login</h2>
-        <form
-          id="nameFormId"
-          name="nameForm"
-          onsubmit="event.preventDefault(); submitHandler();"
+  <body>
+    <div id="login-screen">
+      <div id="login">
+        <!-- <img
+          id="loginImg"
+          src="https://github.com/mattrbanks/face-conference/blob/master/images/video-conference.jpg?raw=true"
+          alt="a video conference"
+        /> -->
+        <div
+          style="
+            position: absolute;
+            top: 1rem;
+            left: 5rem;
+            text-decoration: underline overline dotted #ff0000;
+          "
         >
-          <div>
-            <label for="name">Name</label>
-          </div>
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              required
-              class="form-control"
+          <h1 style="color: rgb(78, 78, 78)">Face Conference</h1>
+        </div>
+        <div id="svg-down-arrow" onclick="scrollToBottom();">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M32 62.5C15.1553 62.5 1.5 48.8447 1.5 32C1.5 15.1553 15.1553 1.5 32 1.5C48.8447 1.5 62.5 15.1553 62.5 32C62.5 48.8447 48.8447 62.5 32 62.5Z"
+              stroke="black"
+              stroke-width="3"
             />
-            <button
-              id="signInBtn"
-              type="submit"
-              value="Submit"
-              class="btn btn-primary"
-            >
-              sign in
-            </button>
-          </div>
-        </form>
-        <h2 id="user-name-test" style="text-align: center"></h2>
+            <path d="M6.5 30L32 50L56.5 30" stroke="black" stroke-width="3" />
+          </svg>
+        </div>
+      </div>
+      <div id="login-name">
+        <div>
+          <h2>Please submit your name to login</h2>
+          <form
+            id="nameFormId"
+            name="nameForm"
+            onsubmit="event.preventDefault(); submitHandler();"
+          >
+            <div>
+              <label for="name">Name</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+                class="form-control"
+              />
+              <button
+                id="signInBtn"
+                type="submit"
+                value="Submit"
+                class="btn btn-primary"
+              >
+                sign in
+              </button>
+            </div>
+          </form>
+          <h2 id="user-name-test" style="text-align: center"></h2>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="dashboard" class="invisible">
-    <h2 id="user-name" style="text-align: center"></h2>
-    <div style="text-align: center">
-      <h1>Welcome to your dashboard</h1>
-    </div>
-    <div id="dash-choices">
-      <div id="room-name">
-        <div style="margin-right: 10rem">
-          <h2>Create a new room</h2>
-          <form
-            id="roomNameFormId"
-            name="roomNameForm"
-            onsubmit="event.preventDefault(); roomSubmitHandler();"
-          >
-            <!-- <div>
+    <div id="dashboard" class="invisible">
+      <h2
+        id="user-name"
+        style="text-align: center; text-decoration: underline dotted #7073c0"
+      ></h2>
+      <div style="text-align: center">
+        <h1>Welcome to your dashboard</h1>
+      </div>
+      <div style="text-align: center">
+        <svg
+          width="375"
+          height="116"
+          viewBox="0 0 375 116"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0)">
+            <path
+              d="M59.5 43.5C102.5 12.6775 196.528 69.3036 279 43.5C363.683 17.0043 375.5 9.00068 375.5 9.00068C375.5 9.00068 476.437 -214.007 430 -66.9999C411.754 -9.23755 309.446 76.1563 255.5 75.5001C172.151 74.4862 61.7943 29.6686 -7 110.5C-120.32 243.648 16.5 74.3225 59.5 43.5Z"
+              fill="#7073C0"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0">
+              <rect
+                width="375"
+                height="812"
+                fill="white"
+                transform="translate(0 -421)"
+              />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div id="dash-choices">
+        <div id="room-name">
+          <div style="margin-right: 10rem">
+            <h2>Create a private room</h2>
+            <form
+              id="roomNameFormId"
+              name="roomNameForm"
+              onsubmit="event.preventDefault(); roomSubmitHandler();"
+            >
+              <!-- <div>
               <label for="roomName">Room Name</label>
             </div> -->
-            <div id="inputRoom" class="form-group">
-              <!-- <input
+              <div id="input-room" class="form-group">
+                <!-- <input
                 type="text"
                 name="roomName"
                 placeholder="Name your room"
                 required
                 class="form-control"
               /> -->
-              <button
-                id="new-room-btn"
-                type="submit"
-                value="Submit"
-                class="btn btn-primary"
+                <button
+                  id="new-room-btn"
+                  type="submit"
+                  value="Submit"
+                  class="btn btn-primary"
+                >
+                  Generate Room
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="ex-room-name">
+          <h2>Join an existing room</h2>
+          <ul id="room-list">
+            <a style="text-decoration: none" href="/lobby">
+              <li
+                style="text-decoration: none; color: #000; text-align: center"
               >
-                Generate Room
-              </button>
-            </div>
-          </form>
+                Lobby (For Everyone)
+              </li>
+            </a>
+          </ul>
         </div>
       </div>
-      <div id="ex-room-name">
-        <h2>Join an existing room</h2>
-        <ul id="room-list">
-          <a style="text-decoration: none" href="/lobby">
-            <li style="text-decoration: none; color: #000; text-align: center">
-              Lobby (For Everyone)
-            </li>
-          </a>
-        </ul>
+      <div style="text-align: center">
+        <svg
+          width="375"
+          height="116"
+          viewBox="0 0 375 116"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0)">
+            <path
+              d="M59.5 43.5C102.5 12.6775 196.528 69.3036 279 43.5C363.683 17.0043 375.5 9.00068 375.5 9.00068C375.5 9.00068 476.437 -214.007 430 -66.9999C411.754 -9.23755 309.446 76.1563 255.5 75.5001C172.151 74.4862 61.7943 29.6686 -7 110.5C-120.32 243.648 16.5 74.3225 59.5 43.5Z"
+              fill="#7073C0"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0">
+              <rect
+                width="375"
+                height="812"
+                fill="white"
+                transform="translate(0 -421)"
+              />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div style="text-align: center">
+        <button id="renameBtn" class="btn btn-primary" onclick="rename();">
+          Change name
+        </button>
       </div>
     </div>
-  </div>
+  </body>
 </html>
