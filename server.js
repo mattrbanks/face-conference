@@ -61,7 +61,8 @@ app.get("/:room", (req, res) => {
 });
 
 app.post("/dashboard", (req, res) => {
-  //console.log(req.body.room);
+  console.log(req.body.room);
+  console.log(typeof req.body.room);
   const newRoom = new Room({
     room: req.body.room,
   });
@@ -75,17 +76,17 @@ app.post("/dashboard", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  //console.log(req.body);
-  res.send("got it");
+  console.log(req.body.name);
+  res.send("got it! " + req.body.name);
 });
 
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
-    socket.join(roomId); // roomId is a url route so you join it by going to the url roomId
-    socket.to(roomId).broadcast.emit("user-connected", userId);
+    socket.join(roomId); // roomId is a url route so you join it, via websocket, by going to the url roomId
+    socket.to(roomId).broadcast.emit("user-connected", userId); //share your stream with all people in same room but yourself
 
     socket.on("disconnect", () => {
-      socket.to(roomId).broadcast.emit("user-disconnected", userId);
+      socket.to(roomId).broadcast.emit("user-disconnected", userId); //delete your stream with all people in same room
     });
   });
 
