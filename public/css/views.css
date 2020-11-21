@@ -117,6 +117,14 @@ ul li:hover {
   margin-top: 1rem;
 }
 
+#dashboard {
+  background: "";
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
 #login {
   background: url("https://github.com/mattrbanks/face-conference/blob/master/images/video-conference.jpg?raw=true");
   background-repeat: no-repeat;
