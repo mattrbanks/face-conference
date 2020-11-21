@@ -23,6 +23,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, 300px);
         grid-auto-rows: 300px;
+        margin-bottom: 10rem;
       }
 
       video {
@@ -32,12 +33,15 @@
       }
     </style>
   </head>
-  <body style="background-color: #000">
-    <h2 style="text-align: center; color: #fff">
+  <body id="room-body">
+    <h3 style="text-align: center; color: #fff; margin: 0 1rem 0 1rem">
       Invite your friends now or save the url and come back later:
-    </h2>
+    </h3>
     <div style="display: flex; justify-content: center">
-      <h3 id="url" style="color: #fff"></h3>
+      <h4
+        id="url"
+        style="color: #fff; text-align: center; margin: 0 1rem 0 1rem"
+      ></h4>
       <a style="margin: 1.9rem 0 0 1rem"
         ><button id="copy-url-btn" style="color: #000">Copy url</button></a
       >
@@ -54,7 +58,7 @@
   <div id="room-dock-bottom">
     <a style="color: white; text-decoration: none" href="/dashboard"
       ><button
-        style="margin: 5rem 0 0 0; width: 33%; height: 6rem"
+        style="margin: 5rem 0.5rem 0 0; width: 30%; height: 6rem"
         class="btn-secondary"
       >
         <svg
@@ -73,7 +77,7 @@
     <a
       ><button
         id="video-btn"
-        style="margin: 5rem 0 0 0; width: 33%; height: 6rem"
+        style="margin: 5rem 0.5rem 0 0; width: 30%; height: 6rem"
         class="btn-secondary"
       >
         <div id="video-on">
@@ -89,7 +93,7 @@
             />
           </svg>
         </div>
-        <div id="video-off">
+        <div id="video-off" class="invisible">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="55"
@@ -106,7 +110,7 @@
     <a
       ><button
         id="audio-btn"
-        style="margin: 5rem 0 0 0; width: 33%; height: 6rem"
+        style="margin: 5rem 0 0 0; width: 30%; height: 6rem"
         class="btn-secondary"
       >
         <div id="audio-on">
@@ -122,7 +126,7 @@
             />
           </svg>
         </div>
-        <div id="audio-off">
+        <div id="audio-off" class="invisible">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="55"

@@ -39,13 +39,66 @@ ul li:hover {
 #room-name {
   /* display: flex;
         justify-content: center; */
-  margin: 0 10rem 0 0;
+  margin: 0 2rem 0 0;
   border-right: 0.0625rem solid grey;
 }
+
+#room-name-inner {
+  margin-right: 2rem;
+}
+
+@media (max-width: 500px) and (orientation: portrait) {
+  #room-name-inner {
+    margin-right: 1rem;
+  }
+  #room-name {
+    /* display: flex;
+        justify-content: center; */
+    margin: 0 0 0 0;
+    border-right: 0.0625rem solid grey;
+  }
+  #join-room {
+    /* display: flex;
+        justify-content: center; */
+    margin: 0 0 0 1rem;
+  }
+  #room-list {
+    margin: 0 1rem 0 0;
+    padding: 0 0 0 1rem;
+  }
+  ul li {
+    font-size: 1.25rem;
+  }
+}
+@media (max-width: 900px) and (orientation: landscape) {
+  #room-name-inner {
+    margin-right: 1rem;
+  }
+  #room-name {
+    /* display: flex;
+        justify-content: center; */
+    margin: 0 1rem 0 0;
+    border-right: 0.0625rem solid grey;
+  }
+  #join-room {
+    /* display: flex;
+        justify-content: center; */
+    margin: 0 0 0 1rem;
+  }
+  #room-list {
+    margin: 0 1rem 0 0;
+    padding: 0 0 0 1rem;
+  }
+  ul li {
+    font-size: 1.25rem;
+  }
+}
+
 #dash-choices {
   display: flex;
   justify-content: center;
 }
+
 #ex-room-name {
   /* display: flex;
         justify-content: center; */
@@ -75,7 +128,7 @@ ul li:hover {
 #login-name {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin: 1rem 1rem 0 1rem;
 }
 
 #svg-down-arrow {
@@ -84,11 +137,36 @@ ul li:hover {
   left: 50%;
 }
 
+#room-body {
+  background-color: #000;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
 #room-dock-bottom {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   text-align: center;
+  opacity: 0.7;
+}
+
+@media (min-width: 501px) and (orientation: portrait) {
+  #room-dock-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (min-width: 901px) and (orientation: landscape) {
+  #room-dock-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .invisible {
@@ -97,4 +175,15 @@ ul li:hover {
 
 .visible {
   display: block;
+}
+
+@media (max-width: 500px) and (orientation: portrait) {
+  .mobile-menu-styles-p {
+    margin: 0 0 0 2rem;
+  }
+}
+@media (max-width: 900px) and (orientation: landscape) {
+  .mobile-menu-styles-l {
+    margin-right: 5rem;
+  }
 }
