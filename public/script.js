@@ -1,20 +1,11 @@
 const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer({
-  //local server
-  // host: "/",
-  // port: "3002",
-
   //hosted server
   key: "peerjs",
   host: "face-conference-peerjs-server2.herokuapp.com",
   secure: true,
   port: 443,
-
-  //cloud server config
-  // debug: "3",
-  // secure: true,
-  // port: 443,
 });
 const myVideo = document.createElement("video");
 myVideo.muted = true; // The user should not hear their own voice
@@ -103,9 +94,7 @@ navigator.mediaDevices
       connectToNewUser(userId, stream);
       //check other console of other user because broadcast is only sent to other users but not you
       peers[userId].name = sessionStorage.getItem("name"); //needs to be dynamic
-      console.log(peers[userId].name);
-      console.log(peers);
-      console.log(peers[userId]);
+      //console logs put here will be visible on another users console because of broadcast
     });
   })
   .catch((err) => {
@@ -152,10 +141,7 @@ function dashName() {
     console.log(socket.id);
     console.log(userName);
   });
-  //document.getElementById("user-name").innerText = `${"name"}`;
   if (typeof Storage !== "undefined") {
-    // Store
-    //sessionStorage.setItem("name", x);
     // Retrieve
     document.getElementById("user-name").innerHTML =
       "Hello " + sessionStorage.getItem("name") + ",";
@@ -163,23 +149,15 @@ function dashName() {
     document.getElementById("user-name").innerHTML =
       "Sorry, your browser does not support Web Storage...";
   }
-  // if (tempName.length > 0) {
-  //   let name = tempName[0];
-  //   document.getElementById("user-name").innerText = `${name}`;
-  //   //tempName = [];
-  // } else {
-  //   document.getElementById("user-name").innerText = `${"...loading"}`;
-  // }
 }
 
 function rename() {
-  document.getElementById("login-name").style.display = "flex";
+  window.location.href = "/";
 }
 
 function submitHandler() {
   console.log("submitHandler worked");
   let x = document.forms["nameForm"]["name"].value;
-  //socket.emit("user-name", x);
   console.log("Name: " + x);
   let userDbNumber = x + Math.random();
   console.log(userDbNumber);
@@ -195,24 +173,6 @@ function submitHandler() {
     .then((text) => console.log(text))
     .catch((err) => console.log(err));
 
-  //let name = [];
-
-  // socket.on("send-back-name", (userName) => {
-  //   //let name = userName;
-  //   //name.push(userName);
-  //   //return name;
-  //   // tempName.push(userName);
-  //   // console.log(tempName);
-  //   //window.setTimeout(console.log(userName), 5000);
-  //   //document.getElementById("welcome-msg").addEventListener("load", myFunction);
-  //   //document.getElementById("user-name").innerText = `${window.location.href}`;
-  //   //document.getElementById("user-name").innerHTML = "userName";
-  //   //socket.emit("send-back-name", userName);
-  //   // userNameTemp.push(userName);
-  //   // console.log(userNameTemp);
-  // });
-  //myFunction(name);
-  //window.location.href = "/dashboard";
   document.getElementById("nameFormId").reset();
   document.getElementById("login-name").style.display = "none";
   document.getElementById("login").style.display = "none";
@@ -228,8 +188,6 @@ function submitHandler() {
     document.getElementById("user-name").innerHTML =
       "Sorry, your browser does not support Web Storage...";
   }
-  //dashName();
-  //loadNameDash();
 }
 
 function roomSubmitHandler() {
@@ -258,8 +216,6 @@ function roomSubmitHandler() {
       .then((text) => console.log(text))
       .catch((err) => console.log(err));
   });
-  //let x = document.forms["roomNameForm"]["roomName"].value;
-  //console.log("Room Name: " + x);
   let text = "Room " + Math.random();
   let li = document.createElement("li");
   let node = document.createTextNode(text);

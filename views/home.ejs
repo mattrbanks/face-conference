@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <meta property="og:title" content="Face Conference" />
+    <meta property="og:description"
+      content="This is a video chat web application that can generate meetings for you and your friends to talk, face to face, privately online." />
+    <meta property="og:image"
+      content="https://raw.githubusercontent.com/mattrbanks/face-conference/15085634bd4326e1847333f7371454a6fb3b6e0f/images/videocam-24px.svg" />
+    <meta property="og:url" content="https://face-conference.herokuapp.com/" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -11,11 +27,38 @@
     <link rel="stylesheet" type="text/css" href="/css/views.css" />
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="script.js" defer></script>
-    <title>Document</title>
+    <title>Face Conference</title>
+    <style>
+      html {
+        min-height: 100%;
+        background: url("https://github.com/mattrbanks/face-conference/blob/master/images/video-call.png?raw=true");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+      }
+
+      body {
+        background-color: transparent !important;
+      }
+    </style>
   </head>
-  <body id="dashboard" onload="dashName()">
-    <h2 id="user-name" style="text-align: center"></h2>
-    <div style="text-align: center">
+  <body onload="dashName()">
+    <h2 
+      id="user-name"
+      style="
+        text-align: center;
+        text-decoration: underline dotted #7073c0;
+        color: #7073c0;
+      "
+    ></h2>
+    <div 
+      style="
+        text-align: center;
+        color: #eee;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      "
+    >
       <h1>Welcome to your dashboard</h1>
     </div>
     <div style="text-align: center">
@@ -50,23 +93,21 @@
           id="room-name-inner"
           class="mobile-menu-styles-p mobile-menu-styles-l"
         >
-          <h2>Create a private room</h2>
+          <h2
+            style="
+              color: #eee;
+              text-shadow: -1px 0 black, 0 1px black, 1px 0 black,
+                0 -1px black;
+            "
+          >
+            Create a private room
+          </h2>
           <form
             id="roomNameFormId"
             name="roomNameForm"
             onsubmit="event.preventDefault(); roomSubmitHandler();"
           >
-            <!-- <div>
-              <label for="roomName">Room Name</label>
-            </div> -->
             <div id="inputRoom" class="form-group">
-              <!-- <input
-                type="text"
-                name="roomName"
-                placeholder="Name your room"
-                required
-                class="form-control"
-              /> -->
               <button
                 id="new-room-btn"
                 type="submit"
@@ -80,7 +121,15 @@
         </div>
       </div>
       <div id="ex-room-name">
-        <h2 id="join-room">Join an existing room</h2>
+        <h2 
+          id="join-room"
+          style="
+            color: #eee;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+          "
+        >
+          Join an existing room
+        </h2>
         <ul id="room-list">
           <a style="text-decoration: none" href="/lobby"
             ><li style="text-decoration: none; color: #000; text-align: center">
@@ -115,6 +164,15 @@
           </clipPath>
         </defs>
       </svg>
+      <div style="text-align: center; margin-bottom: 2rem">
+        <button
+          id="renameBtn"
+          class="btn btn-primary"
+          style="outline: none"
+          onclick="rename();"
+        >
+          Back to login
+        </button>
     </div>
   </body>
 </html>

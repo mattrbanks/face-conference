@@ -12,7 +12,6 @@ h1 {
 }
 
 ul li {
-  /* color: blue; */
   cursor: pointer;
   position: relative;
   padding: 12px 8px 12px 12px;
@@ -37,10 +36,8 @@ ul li:hover {
 }
 
 #room-name {
-  /* display: flex;
-        justify-content: center; */
   margin: 0 2rem 0 0;
-  border-right: 0.0625rem solid grey;
+  border-right: 0.0625rem solid #7073c0;
 }
 
 #room-name-inner {
@@ -52,14 +49,10 @@ ul li:hover {
     margin-right: 1rem;
   }
   #room-name {
-    /* display: flex;
-        justify-content: center; */
     margin: 0 0 0 0;
-    border-right: 0.0625rem solid grey;
+    border-right: 0.0625rem solid #7073c0;
   }
   #join-room {
-    /* display: flex;
-        justify-content: center; */
     margin: 0 0 0 1rem;
   }
   #room-list {
@@ -75,14 +68,10 @@ ul li:hover {
     margin-right: 1rem;
   }
   #room-name {
-    /* display: flex;
-        justify-content: center; */
     margin: 0 1rem 0 0;
-    border-right: 0.0625rem solid grey;
+    border-right: 0.0625rem solid #7073c0;
   }
   #join-room {
-    /* display: flex;
-        justify-content: center; */
     margin: 0 0 0 1rem;
   }
   #room-list {
@@ -100,8 +89,6 @@ ul li:hover {
 }
 
 #ex-room-name {
-  /* display: flex;
-        justify-content: center; */
   margin: 0 0 0 0;
 }
 
@@ -117,20 +104,16 @@ ul li:hover {
   margin-top: 1rem;
 }
 
-#dashboard {
-  background: "";
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-
 #login {
   background: url("https://github.com/mattrbanks/face-conference/blob/master/images/video-conference.jpg?raw=true");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
+}
+
+#login-screen {
+  background-color: #fff;
 }
 
 #login-name {
