@@ -28,12 +28,8 @@ inviteLink.onclick = function () {
 };
 
 const peers = {};
-console.log(peers);
 let roomIdTempHolder = [];
-console.log(roomIdTempHolder);
 let newRoom = window.location.href;
-console.log(newRoom);
-console.log(window.location.href);
 navigator.mediaDevices
   .getUserMedia({
     video: true,
@@ -44,16 +40,13 @@ navigator.mediaDevices
 
     let streamVar = stream;
     let micSwitch = true; // mic is on initially
-    console.log(micSwitch);
     let videoSwitch = true; // video of user is on initially
-    console.log(videoSwitch);
 
     //video mute
     videoButton.onclick = function () {
       if (streamVar != null && streamVar.getVideoTracks().length > 0) {
         //If video exists
         videoSwitch = !videoSwitch; //Toggle video of user
-        console.log(videoSwitch);
 
         streamVar.getVideoTracks()[0].enabled = videoSwitch;
         if (videoSwitch === true) {
@@ -69,7 +62,6 @@ navigator.mediaDevices
     audioButton.onclick = function () {
       if (streamVar != null && streamVar.getAudioTracks().length > 0) {
         micSwitch = !micSwitch; //Toggle Mic
-        console.log(micSwitch);
 
         streamVar.getAudioTracks()[0].enabled = micSwitch;
         if (micSwitch === true) {
@@ -110,8 +102,6 @@ socket.on("user-disconnected", (userId) => {
 myPeer.on("open", (id) => {
   //your websocket is used to join a generated room
   socket.emit("join-room", ROOM_ID, id); //room id and user id sent to server
-  console.log(ROOM_ID, id);
-  console.log(peers);
 });
 
 function connectToNewUser(userId, stream) {
@@ -138,13 +128,16 @@ function addVideoStream(video, stream) {
 function dashName() {
   socket.emit("send-back-name", { name: "" });
   socket.on("send-back-name", (userName) => {
-    console.log(socket.id);
-    console.log(userName);
+    //this is here for a future feature and does not interfere with any key processes
   });
   if (typeof Storage !== "undefined") {
-    // Retrieve
-    document.getElementById("user-name").innerHTML =
-      "Hello " + sessionStorage.getItem("name") + ",";
+    if (sessionStorage.getItem("name") !== null) {
+      // Retrieve
+      document.getElementById("user-name").innerHTML =
+        "Hello " + sessionStorage.getItem("name") + ",";
+    } else if (sessionStorage.getItem("name") === null) {
+      document.getElementById("user-name").innerHTML = "Hello " + ",";
+    }
   } else {
     document.getElementById("user-name").innerHTML =
       "Sorry, your browser does not support Web Storage...";
@@ -156,11 +149,8 @@ function rename() {
 }
 
 function submitHandler() {
-  console.log("submitHandler worked");
   let x = document.forms["nameForm"]["name"].value;
-  console.log("Name: " + x);
   let userDbNumber = x + Math.random();
-  console.log(userDbNumber);
 
   fetch("http://localhost:3001/", {
     method: "POST",
@@ -195,15 +185,10 @@ function roomSubmitHandler() {
   let theNewId = "";
   socket.emit("generate-id", () => {
     //THIS NEEDS TO TRIGGER THE SERVER TO GENERATE A UUID AND SEND IT BACK HERE FOR USE
-    console.log("call server for uuid");
   });
   socket.on("new-id-generated", (newId) => {
-    console.log(newId);
-    console.log(generatedId);
     generatedId = newId.slice(0);
     theNewId = newId.slice(0);
-    console.log(generatedId);
-    console.log(theNewId);
 
     fetch("http://localhost:3001/dashboard", {
       method: "POST",
